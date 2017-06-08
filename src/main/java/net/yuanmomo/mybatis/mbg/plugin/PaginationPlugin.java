@@ -20,13 +20,11 @@ import java.util.List;
  */
 public class PaginationPlugin extends PluginAdapter {
     /**
-     * modelExampleClassGenerated: bean类的criteria类中加入start和count两个属性. <br/>
+     * Add two fields start and count with default value of -1 into Criteria class.
      *
-     * @author Hongbin Yuan
      * @param topLevelClass
      * @param introspectedTable
      * @return
-     * @see PluginAdapter#modelExampleClassGenerated(TopLevelClass, IntrospectedTable)
      */
     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass,
@@ -42,26 +40,24 @@ public class PaginationPlugin extends PluginAdapter {
     }
 
     /**
-     * sqlMapSelectByExampleWithoutBLOBsElementGenerated: 写入xml文件. <br/>
+     *  Modify the selectByExample element in the mapper xml file.
      *
-     * @author Hongbin Yuan
      * @param element
      * @param introspectedTable
      * @return
-     * @see PluginAdapter#sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement, IntrospectedTable)
      */
     @Override
     public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable) {
-        // 向mapper xml中添加limit的start字句
-        XmlElement limitStartElement = new XmlElement("if"); //$NON-NLS-1$
-        limitStartElement.addAttribute(new Attribute("test", "start &gt;= 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
+        // add start field
+        XmlElement limitStartElement = new XmlElement("if");
+        limitStartElement.addAttribute(new Attribute("test", "start &gt;= 0 "));
         limitStartElement.addElement(new TextElement("limit ${start}"));
         element.addElement(limitStartElement);
 
-        // 向mapper xml中添加limit的count字句
-        XmlElement limitEndElement = new XmlElement("if"); //$NON-NLS-1$
-        limitEndElement.addAttribute(new Attribute("test", "count &gt;= 0 ")); //$NON-NLS-1$ //$NON-NLS-2$
+        // add count field
+        XmlElement limitEndElement = new XmlElement("if");
+        limitEndElement.addAttribute(new Attribute("test", "count &gt;= 0 "));
         limitEndElement.addElement(new TextElement(",${count}"));
         element.addElement(limitEndElement);
 
@@ -69,6 +65,14 @@ public class PaginationPlugin extends PluginAdapter {
                 introspectedTable);
     }
 
+    /**
+     * Modify the selectByExample in sql provider class.
+     *
+     * @param method
+     * @param topLevelClass
+     * @param introspectedTable
+     * @return
+     */
     @Override
     public boolean providerSelectByExampleWithoutBLOBsMethodGenerated(
             Method method,
@@ -97,22 +101,20 @@ public class PaginationPlugin extends PluginAdapter {
     }
 
     /**
-     * addField: 添加一个类的成员变量，同时添加相应的 setter 和 getter. <br/>
+     * Add a field into class both with setter and getter. <br/>
      *
-     * @author Hongbin Yuan
      * @param topLevelClass
      * @param introspectedTable
      * @param fieldType
      * @param name
      * @param initializationString
-     * @since JDK 1.6
      */
     private void addField(TopLevelClass topLevelClass,
                           IntrospectedTable introspectedTable,
                           FullyQualifiedJavaType fieldType, String name,
                           String initializationString) {
         CommentGenerator commentGenerator = context.getCommentGenerator();
-        // 添加属性
+        // add field
         Field field = new Field();
         field.setVisibility(JavaVisibility.PROTECTED);
         field.setType(fieldType);
@@ -121,11 +123,11 @@ public class PaginationPlugin extends PluginAdapter {
         commentGenerator.addFieldComment(field, introspectedTable);
         topLevelClass.addField(field);
 
-        // 添加getter和setter时候方法大写属性首字母
+        // upper first char
         char c = name.charAt(0);
         String camel = Character.toUpperCase(c) + name.substring(1);
 
-        // 添加setter方法
+        // add setter
         Method method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setName("set" + camel);
@@ -134,7 +136,7 @@ public class PaginationPlugin extends PluginAdapter {
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
-        // 添加getter方法
+        // add getter
         method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setReturnType(fieldType);
@@ -144,9 +146,7 @@ public class PaginationPlugin extends PluginAdapter {
         topLevelClass.addMethod(method);
     }
 
-    /**
-     * This plugin is always valid - no properties are required
-     */
+    @Override
     public boolean validate(List<String> warnings) {
         return true;
     }
