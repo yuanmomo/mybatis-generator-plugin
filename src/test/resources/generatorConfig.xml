@@ -80,12 +80,12 @@
         </javaClientGenerator>
 
         <!-- table configuration list -->
-        <table tableName="demo" domainObjectName="Demo">
+        <table tableName="table_to_do" domainObjectName="ToDo">
             <!-- The schema of this table, equal to the database name.
                 If configured, then the sql will be "select xxxtable from schema.table".
                 It's useful when there are multi databases.
                 -->
-            <!--<property name="runtimeSchema" value="test"/>-->
+            <!--<property name="runtimeSchema" value="todo"/>-->
 
             <!-- The auto increment key -->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>

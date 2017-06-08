@@ -19,17 +19,17 @@
 -- Current Database: `test`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `test` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `todo` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `test`;
+USE `todo`;
 
 --
--- 表的结构 `TEST`
+-- table `table_to_do`
 --
 
-CREATE TABLE IF NOT EXISTS `demo` (
+CREATE TABLE IF NOT EXISTS `table_to_do` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `number` int(11) NOT NULL,
+  `to_do` int(11) NOT NULL,
   `version` bigint(20) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
