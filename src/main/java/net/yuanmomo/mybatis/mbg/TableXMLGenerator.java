@@ -1,4 +1,4 @@
-package net.yuanmomo.mbg.plugin;
+package net.yuanmomo.mybatis.mbg;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.internal.util.JavaBeansUtil;

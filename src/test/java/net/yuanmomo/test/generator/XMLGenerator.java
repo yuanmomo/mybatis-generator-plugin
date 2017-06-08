@@ -1,7 +1,7 @@
-package net.yuanmomo.mybatis.generator;
+package net.yuanmomo.test.generator;
 
 
-import net.yuanmomo.mybatis.mbg.plugin.TableXMLGenerator;
+import net.yuanmomo.mybatis.mbg.TableXMLGenerator;
 
 import java.util.List;
 

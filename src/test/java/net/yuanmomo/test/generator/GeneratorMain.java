@@ -1,6 +1,7 @@
-package net.yuanmomo.generator;
+package net.yuanmomo.test.generator;
 
-import net.yuanmomo.mbg.MyBatisGeneratorTool;
+
+import net.yuanmomo.mybatis.mbg.MyBatisGeneratorTool;
 
 public class GeneratorMain {
 	public static void main(String args[]) {

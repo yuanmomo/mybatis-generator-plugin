@@ -19,15 +19,13 @@ public class MyBatisGeneratorTool {
 	private static Logger logger = LoggerFactory.getLogger(MyBatisGeneratorTool.class);
 	
 	/**
-	 * generate: 调用MyBatis Generator 生成相应代码. <br/>
+	 *  call MyBatis Generator method.
 	 *
-	 * @author Hongbin Yuan
-	 * @param generatorConfigPath  generatorConfigPath.xml配置文件的路径
-	 * @since JDK 1.6
+	 * @param generatorConfigPath  the path of generatorConfig.xml file. e.g: src/test/resources/generatorConfig.xml
 	 */
 	public static void generate(String generatorConfigPath) {
 		if(generatorConfigPath == null || "".equals(generatorConfigPath.trim())){
-			logger.error("The generatorConfigPath.xml location specified is null, user default locate config files.");
+			logger.error("GeneratorConfig.xml location null.");
 			return;
 		}
 		

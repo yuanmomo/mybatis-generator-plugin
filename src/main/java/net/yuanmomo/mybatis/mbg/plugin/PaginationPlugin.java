@@ -1,25 +1,4 @@
-/**
- * Project Name : dooliuManager
- * Package Name : com.clou.douliu.server.mybatis.generator
- * Created on   : 2013-9-6下午3:08:21
- * File Name    : PaginationPlugin.java
- * <p>
- * Author       : Hongbin Yuan
- * Blog         : yuanmomo.net
- * Company      : 成都逗溜网科技有限公司
- */
-
 package net.yuanmomo.mybatis.mbg.plugin;
-/**
- * ClassName : PaginationPlugin 
- * Date      : 2013-9-6 下午3:08:21
- *
- * @author   : Hongbin Yuan
- * @version
- * @since JDK 1.6
- * @see
- */
-
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
