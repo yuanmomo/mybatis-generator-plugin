@@ -31,12 +31,12 @@
         </plugin>
 
         <!-- ******************************* customize plugins ******************************* -->
-        <!-- add a extra selectOneByExample method into mapper class -->
+        <!-- add an extra selectOneByExample method into mapper class -->
         <plugin type="net.yuanmomo.mybatis.mbg.plugin.selectone.MapperAddSelectOneByExamplePlugin">
             <property name="methodName" value="getOneByExample"/>
         </plugin>
 
-        <!-- add a extra selectOneByExample method into mapper class -->
+        <!-- add an extra batchInsert method into mapper class -->
         <plugin type="net.yuanmomo.mybatis.mbg.plugin.batch.MySqlBatchInsertPlugin">
             <property name="methodName" value="batchInsert"/>
         </plugin>
@@ -67,12 +67,11 @@
         <!-- java bean configuration -->
         <javaModelGenerator targetPackage="${mbg.modelPackage}"
                             targetProject="${mbg.targetProject}">
-
-            <!-- if multi databases, the turn the enableSubPackages property on-->
+            <!-- if multi databases, the  set enableSubPackages true -->
             <!--<property name="enableSubPackages" value="true"/>-->
         </javaModelGenerator>
 
-        <!-- mapper xml configuration (replaced by provider class) -->
+         <!--mapper xml configuration (replaced by provider class) -->
         <!--<sqlMapGenerator targetPackage="${mbg.sqlMapPackage}"-->
         <!--targetProject="${mbg.targetProject}">-->
         <!--<property name="enableSubPackages" value="true" />-->
