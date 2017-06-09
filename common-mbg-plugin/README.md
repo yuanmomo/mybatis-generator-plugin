@@ -63,7 +63,7 @@ Here I provide a tool to generate these configurations for all the tables in sin
     </context>
 </generatorConfiguration>
 ```
-The demonstration of the configuration file [generatorConfig.xml](https://github.com/yuanmomo/mybatis-generator-plugin/blob/master/common-plugin/src/test/resources/generatorConfig.xml)
+The demonstration of the configuration file [generatorConfig.xml](https://github.com/yuanmomo/mybatis-generator-plugin/blob/master/common-mbg-plugin/src/test/resources/generatorConfig.xml)
  
 ### Table element generator
 
@@ -100,7 +100,7 @@ public class GeneratorMainTest {
 }
 ```
 # More
-More demonstrations can be found [here](https://github.com/yuanmomo/mybatis-generator-plugin/tree/master/common-plugin/src/test)
+More demonstrations can be found [here](https://github.com/yuanmomo/mybatis-generator-plugin/tree/master/common-mbg-plugin/src/test)
 
 
 
