@@ -1,8 +1,8 @@
-package net.yuanmomo.test.generator.mybatis.mapper;
+package net.yuanmomo.test.generator;
 
-import net.yuanmomo.test.generator.BaseTest;
 import net.yuanmomo.test.generator.bean.ToDo;
 import net.yuanmomo.test.generator.bean.ToDoParam;
+import net.yuanmomo.test.generator.mybatis.mapper.ToDoMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,10 +19,10 @@ public class ToDoTest extends BaseTest {
 
     @Test
     public void testSelect() {
-        SqlSession sqlSession = null;
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
         try {
             execBeforeCase("todo.sql");
-            sqlSession = sqlSessionFactory.openSession();
+
             ToDoMapper mapper = sqlSession.getMapper(ToDoMapper.class);
             ToDo todo = new ToDo();
             todo.setId(1L);
@@ -44,6 +44,7 @@ public class ToDoTest extends BaseTest {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            sqlSession.rollback(true);
             sqlSession.close();
         }
     }
