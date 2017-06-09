@@ -9,7 +9,7 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>common-plugin</module>
+        <module>common-mbg-plugin</module>
     </modules>
 
     <name>mybatis-generator-plugin</name>
