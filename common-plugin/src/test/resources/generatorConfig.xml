@@ -36,6 +36,11 @@
             <property name="methodName" value="getOneByExample"/>
         </plugin>
 
+        <!-- add a extra selectOneByExample method into mapper class -->
+        <plugin type="net.yuanmomo.mybatis.mbg.plugin.batch.MySqlBatchInsertPlugin">
+            <property name="methodName" value="batchInsert"/>
+        </plugin>
+
         <!-- Pagination plugin. -->
         <plugin type="net.yuanmomo.mybatis.mbg.plugin.PaginationPlugin"/>
 

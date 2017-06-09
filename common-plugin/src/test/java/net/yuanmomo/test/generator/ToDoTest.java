@@ -8,7 +8,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,4 +54,77 @@ public class ToDoTest extends BaseTest {
         }
     }
 
+    @Test
+    public void testBatchInsert() {
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
+        try {
+
+            ToDoMapper mapper = sqlSession.getMapper(ToDoMapper.class);
+            List<ToDo> toDoList = new ArrayList<>();
+            ToDo todo1 = new ToDo();
+            todo1.setToDo(1);
+            todo1.setRemark(1L);
+            toDoList.add(todo1);
+
+            ToDo todo2 = new ToDo();
+            todo2.setToDo(2);
+            todo2.setRemark(2L);
+            toDoList.add(todo2);
+
+            int count = mapper.batchInsert(toDoList);
+            System.out.println(toDoList);
+
+            Assert.assertTrue(count == 2);
+            for (ToDo toDo : toDoList) {
+                Assert.assertTrue(toDo.getId() != null);
+            }
+        } finally {
+            sqlSession.rollback(true);
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testBatchInsertByConection() {
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
+        Connection connection = null;
+        try {
+            connection = sqlSession.getConnection();
+            connection.setAutoCommit(false);
+
+            PreparedStatement pstm = connection.prepareStatement(
+                    "insert into table_to_do (to_do,remark) values(?, ?), (?, ?), (?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
+
+            pstm.setString(1, "1");
+            pstm.setString(2, "1");
+
+
+            pstm.setString(3, "2");
+            pstm.setString(4, "2");
+
+            pstm.setString(5, "3");
+            pstm.setString(6, "3");
+
+            pstm.addBatch();
+            pstm.executeBatch();
+
+            ResultSet rs = pstm.getGeneratedKeys();
+            while (rs.next()) {
+                Object value = rs.getObject(1);
+                System.out.println(value);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            sqlSession.rollback(true);
+            sqlSession.close();
+        }
+    }
 }

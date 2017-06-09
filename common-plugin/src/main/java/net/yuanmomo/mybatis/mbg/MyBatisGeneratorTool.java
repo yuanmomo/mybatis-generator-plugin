@@ -23,13 +23,12 @@ public class MyBatisGeneratorTool {
 	 *
 	 * @param generatorConfigPath  the path of generatorConfig.xml file. e.g: src/test/resources/generatorConfig.xml
 	 */
-	public static void generate(String generatorConfigPath) {
+	public static void generate(String generatorConfigPath,List<String> warnings) {
 		if(generatorConfigPath == null || "".equals(generatorConfigPath.trim())){
 			logger.error("GeneratorConfig.xml location null.");
 			return;
 		}
 		
-		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
 		logger.info("Current path is " + new File(".").getAbsolutePath());
 		File configFile = new File(generatorConfigPath);
@@ -59,4 +58,14 @@ public class MyBatisGeneratorTool {
 			logger.error("InterruptedException",e);
 		}
 	}
+
+	/**
+	 *
+	 * @param generatorConfigPath
+	 */
+	public static void generate(String generatorConfigPath) {
+		List<String> warnings = new ArrayList<String>();
+		generate(generatorConfigPath,warnings);
+    }
+
 }

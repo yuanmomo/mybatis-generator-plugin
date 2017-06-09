@@ -70,7 +70,7 @@ public class AnnotatedSelectOneByExampleWithoutBLOBsMethodGenerator extends
         sb.append("@SelectProvider(type="); //$NON-NLS-1$
         sb.append(fqjt.getShortName());
         sb.append(".class, method=\""); //$NON-NLS-1$
-        sb.append(MapperAddSelectOneByExamplePlugin.SELECT_ONE_BY_EXAMPLE_PROVIDER_METHOD_NAME);
+        sb.append(methodName);
         sb.append("\")"); //$NON-NLS-1$
 
         method.addAnnotation(sb.toString());

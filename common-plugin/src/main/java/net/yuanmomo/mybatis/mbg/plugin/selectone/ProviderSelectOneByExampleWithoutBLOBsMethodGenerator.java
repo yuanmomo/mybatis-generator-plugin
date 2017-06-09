@@ -33,7 +33,7 @@ public class ProviderSelectOneByExampleWithoutBLOBsMethodGenerator extends Abstr
         importedTypes.add(fqjt);
 
 
-        Method method = new Method(MapperAddSelectOneByExamplePlugin.SELECT_ONE_BY_EXAMPLE_PROVIDER_METHOD_NAME);
+        Method method = new Method(methodName);
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setReturnType(FullyQualifiedJavaType.getStringInstance());
         method.addParameter(new Parameter(fqjt, "example")); //$NON-NLS-1$
