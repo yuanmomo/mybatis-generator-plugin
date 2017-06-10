@@ -32,20 +32,20 @@
 
         <!-- ******************************* customize plugins ******************************* -->
         <!-- add an extra selectOneByExample method into mapper class -->
-        <plugin type="net.yuanmomo.mybatis.mbg.plugin.selectone.MapperAddSelectOneByExamplePlugin">
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.selectone.MapperAddSelectOneByExamplePlugin">
             <property name="methodName" value="getOneByExample"/>
         </plugin>
 
         <!-- add an extra batchInsert method into mapper class -->
-        <plugin type="net.yuanmomo.mybatis.mbg.plugin.batch.MySqlBatchInsertPlugin">
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.batch.MySqlBatchInsertPlugin">
             <property name="methodName" value="batchInsert"/>
         </plugin>
 
         <!-- Pagination plugin. -->
-        <plugin type="net.yuanmomo.mybatis.mbg.plugin.PaginationPlugin"/>
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.PaginationPlugin"/>
 
         <!-- Extra DAO interface. -->
-        <plugin type="net.yuanmomo.mybatis.mbg.plugin.DAOPlugin">
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.DAOPlugin">
             <property name="typeName" value="DAO"/>
         </plugin>
 

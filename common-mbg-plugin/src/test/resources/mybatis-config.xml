@@ -10,7 +10,7 @@
     </settings>
 
     <typeAliases>
-        <package name="net.yuanmomo.test.generator.bean"/>
+        <package name="com.github.yuanmomo.test.generator.bean"/>
     </typeAliases>
 
     <!-- DataSource with transaction -->
@@ -29,6 +29,6 @@
 
     <!-- mappers location -->
     <mappers>
-        <package name="net.yuanmomo.test.generator.mybatis.mapper"/>
+        <package name="com.github.yuanmomo.test.generator.mybatis.mapper"/>
     </mappers>
 </configuration>
