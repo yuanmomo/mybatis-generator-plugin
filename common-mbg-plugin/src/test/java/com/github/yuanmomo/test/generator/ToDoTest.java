@@ -1,13 +1,16 @@
 package com.github.yuanmomo.test.generator;
 
 import com.github.yuanmomo.test.generator.bean.ToDo;
+import com.github.yuanmomo.test.generator.bean.ToDoChild;
 import com.github.yuanmomo.test.generator.bean.ToDoParam;
 import com.github.yuanmomo.test.generator.mybatis.mapper.ToDoMapper;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -123,6 +126,57 @@ public class ToDoTest extends BaseTest {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            sqlSession.rollback(true);
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testChild(){
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
+        try {
+            ToDoMapper mapper = sqlSession.getMapper(ToDoMapper.class);
+
+            // test insert
+            ToDoChild todo = new ToDoChild();
+            todo.setToDo(1);
+            todo.setRemark(1L);
+            todo.setChild("child");
+            int count = mapper.insertSelective(todo);
+            Assert.assertTrue(count == 1);
+
+            ToDoParam param = new ToDoParam();
+            param.createCriteria().andRemarkEqualTo(1L).andToDoEqualTo(1);
+            ToDo inserted = mapper.selectOneByExample(param);
+            Assert.assertEquals(todo.getToDo(),inserted.getToDo());
+            Assert.assertEquals(todo.getRemark(),inserted.getRemark());
+            Assert.assertEquals(todo.getId(),inserted.getId());
+
+            ToDoChild child = new ToDoChild();
+            BeanUtils.copyProperties(child,inserted);
+            Assert.assertEquals(child.getToDo(),inserted.getToDo());
+            Assert.assertEquals(child.getRemark(),inserted.getRemark());
+            Assert.assertEquals(child.getId(),inserted.getId());
+            System.out.println(String.format("child : [%s]",child));
+            System.out.println(String.format("inserted : [%s]",inserted));
+
+            // test update
+            child.setToDo(2);
+            child.setRemark(2L);
+            count = mapper.updateByPrimaryKeySelective(child);
+            Assert.assertTrue(count == 1);
+
+            param.clear();
+            param.createCriteria().andRemarkEqualTo(2L).andToDoEqualTo(2);
+            ToDo updated = mapper.selectOneByExample(param);
+            Assert.assertEquals(child.getToDo(),updated.getToDo());
+            Assert.assertEquals(child.getRemark(),updated.getRemark());
+            Assert.assertEquals(child.getId(),updated.getId());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } finally {
             sqlSession.rollback(true);
             sqlSession.close();
         }
