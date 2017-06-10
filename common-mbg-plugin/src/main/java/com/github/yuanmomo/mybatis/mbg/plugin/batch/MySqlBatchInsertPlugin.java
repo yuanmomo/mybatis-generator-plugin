@@ -13,7 +13,7 @@ import java.util.Properties;
  * Created by Hongbin.Yuan on 2017-06-09 16:13.
  */
 public class MySqlBatchInsertPlugin extends PluginAdapter {
-    public static String BATCH_INSERT_SELECTIVE_PROVIDER_METHOD_NAME = "batchInsertSelective";
+    public static String BATCH_INSERT_SELECTIVE_PROVIDER_METHOD_NAME = "batchInsert";
     /**
      *  Here should check if current database is MySql.
      * @param warnings
