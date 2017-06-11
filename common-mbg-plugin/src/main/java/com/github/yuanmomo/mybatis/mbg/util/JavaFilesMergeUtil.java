@@ -109,7 +109,7 @@ public class JavaFilesMergeUtil extends DefaultShellCallback {
                         || member instanceof ConstructorDeclaration ) { //  constructor
                     NodeWithJavadoc field = (NodeWithJavadoc) member;
                     Optional<Javadoc> javadocOptional = field.getJavadoc();
-                    if(javadocOptional != null && javadocOptional.get() != null) {
+                    if(javadocOptional != null &&  javadocOptional.isPresent()  ) {
                         Javadoc javadoc = javadocOptional.get();
                         if(javadoc != null
                                 && javadoc.getBlockTags() != null

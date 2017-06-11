@@ -3,6 +3,7 @@ package com.github.yuanmomo.test.generator.bean;
 import java.io.Serializable;
 
 public class ToDo implements Serializable {
+
     /**
      * test field.
      */
