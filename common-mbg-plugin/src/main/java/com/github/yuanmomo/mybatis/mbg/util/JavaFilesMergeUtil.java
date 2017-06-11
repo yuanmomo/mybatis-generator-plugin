@@ -83,7 +83,7 @@ public class JavaFilesMergeUtil extends DefaultShellCallback {
                 // check if exists in existing file
                 boolean exists =false;
                 for (ImportDeclaration existImportDeclaration : existingImportList) {
-                    if(existImportDeclaration.getNameAsString().equals(newImportDeclaration)){
+                    if(existImportDeclaration.getNameAsString().equals(newImportDeclaration.getNameAsString())){
                         exists = true;
                     }
                 }
