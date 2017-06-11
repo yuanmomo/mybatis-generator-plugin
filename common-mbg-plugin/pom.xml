@@ -11,6 +11,7 @@
 
     <artifactId>common-mbg-plugin</artifactId>
     <packaging>jar</packaging>
+    <version>1.0.0</version>
 
     <name>common-mbg-plugin</name>
     <description>

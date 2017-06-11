@@ -1,7 +1,6 @@
 package com.github.yuanmomo.test.generator;
 
 import com.github.yuanmomo.test.generator.bean.ToDo;
-import com.github.yuanmomo.test.generator.bean.ToDoChild;
 import com.github.yuanmomo.test.generator.bean.ToDoParam;
 import com.github.yuanmomo.test.generator.mybatis.mapper.ToDoMapper;
 import org.apache.commons.beanutils.BeanUtils;
@@ -138,7 +137,7 @@ public class ToDoTest extends BaseTest {
             ToDoMapper mapper = sqlSession.getMapper(ToDoMapper.class);
 
             // test insert
-            ToDoChild todo = new ToDoChild();
+            ToDo todo = new ToDo();
             todo.setToDo(1);
             todo.setRemark(1L);
             todo.setChild("child");
@@ -152,7 +151,7 @@ public class ToDoTest extends BaseTest {
             Assert.assertEquals(todo.getRemark(),inserted.getRemark());
             Assert.assertEquals(todo.getId(),inserted.getId());
 
-            ToDoChild child = new ToDoChild();
+            ToDo child = new ToDo();
             BeanUtils.copyProperties(child,inserted);
             Assert.assertEquals(child.getToDo(),inserted.getToDo());
             Assert.assertEquals(child.getRemark(),inserted.getRemark());

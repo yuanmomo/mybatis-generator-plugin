@@ -143,6 +143,6 @@ public interface ToDoMapper {
      * @mbg.generated
      */
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert({ "<script>", "insert into table_to_do (to_do, ", "remark, test_column)", "values<foreach collection=\"list\" item=\"detail\" index=\"index\" separator=\",\">(#{detail.toDo,jdbcType=INTEGER}, ", "#{detail.remark,jdbcType=BIGINT}, #{detail.testColumn,jdbcType=VARCHAR})" })
+    @Insert({ "<script>", "insert into table_to_do (to_do, ", "remark, test_column)", "values<foreach collection=\"list\" item=\"detail\" index=\"index\" separator=\",\">(#{detail.toDo,jdbcType=INTEGER}, ", "#{detail.remark,jdbcType=BIGINT}, #{detail.testColumn,jdbcType=VARCHAR})</foreach></script>" })
     int batchInsert(List<ToDo> list);
 }

@@ -4,17 +4,14 @@ import java.io.Serializable;
 
 public class ToDo implements Serializable {
 
-    /**
-     * test field.
-     */
-    private String test;
+    private String child;
 
-    public String getTest() {
-        return test;
+    public String getChild() {
+        return child;
     }
 
-    public void setTest(String test) {
-        this.test = test;
+    public void setChild(String child) {
+        this.child = child;
     }
 
     /**
