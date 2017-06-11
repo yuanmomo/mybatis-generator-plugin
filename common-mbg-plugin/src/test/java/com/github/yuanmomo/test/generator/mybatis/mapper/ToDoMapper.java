@@ -56,7 +56,7 @@ public interface ToDoMapper {
      *
      * @mbg.generated
      */
-    @Insert({ "insert into table_to_do (to_do, remark)", "values (#{toDo,jdbcType=INTEGER}, #{remark,jdbcType=BIGINT})" })
+    @Insert({ "insert into table_to_do (to_do, remark, ", "test_column)", "values (#{toDo,jdbcType=INTEGER}, #{remark,jdbcType=BIGINT}, ", "#{testColumn,jdbcType=VARCHAR})" })
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(ToDo record);
 
@@ -77,7 +77,7 @@ public interface ToDoMapper {
      * @mbg.generated
      */
     @SelectProvider(type = ToDoSqlProvider.class, method = "selectByExample")
-    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT) })
+    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT), @Result(column = "test_column", property = "testColumn", jdbcType = JdbcType.VARCHAR) })
     List<ToDo> selectByExample(ToDoParam example);
 
     /**
@@ -86,8 +86,8 @@ public interface ToDoMapper {
      *
      * @mbg.generated
      */
-    @Select({ "select", "id, to_do, remark", "from table_to_do", "where id = #{id,jdbcType=BIGINT}" })
-    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT) })
+    @Select({ "select", "id, to_do, remark, test_column", "from table_to_do", "where id = #{id,jdbcType=BIGINT}" })
+    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT), @Result(column = "test_column", property = "testColumn", jdbcType = JdbcType.VARCHAR) })
     ToDo selectByPrimaryKey(Long id);
 
     /**
@@ -123,7 +123,7 @@ public interface ToDoMapper {
      *
      * @mbg.generated
      */
-    @Update({ "update table_to_do", "set to_do = #{toDo,jdbcType=INTEGER},", "remark = #{remark,jdbcType=BIGINT}", "where id = #{id,jdbcType=BIGINT}" })
+    @Update({ "update table_to_do", "set to_do = #{toDo,jdbcType=INTEGER},", "remark = #{remark,jdbcType=BIGINT},", "test_column = #{testColumn,jdbcType=VARCHAR}", "where id = #{id,jdbcType=BIGINT}" })
     int updateByPrimaryKey(ToDo record);
 
     /**
@@ -133,7 +133,7 @@ public interface ToDoMapper {
      * @mbg.generated
      */
     @SelectProvider(type = ToDoSqlProvider.class, method = "getOneByExample")
-    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT) })
+    @Results({ @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true), @Result(column = "to_do", property = "toDo", jdbcType = JdbcType.INTEGER), @Result(column = "remark", property = "remark", jdbcType = JdbcType.BIGINT), @Result(column = "test_column", property = "testColumn", jdbcType = JdbcType.VARCHAR) })
     ToDo selectOneByExample(ToDoParam example);
 
     /**
@@ -143,6 +143,6 @@ public interface ToDoMapper {
      * @mbg.generated
      */
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert({ "<script>", "insert into table_to_do (to_do, ", "remark)", "values<foreach collection=\"list\" item=\"detail\" index=\"index\" separator=\",\">(#{detail.toDo,jdbcType=INTEGER}, ", "#{detail.remark,jdbcType=BIGINT})</foreach></script>" })
+    @Insert({ "<script>", "insert into table_to_do (to_do, ", "remark, test_column)", "values<foreach collection=\"list\" item=\"detail\" index=\"index\" separator=\",\">(#{detail.toDo,jdbcType=INTEGER}, ", "#{detail.remark,jdbcType=BIGINT}, #{detail.testColumn,jdbcType=VARCHAR})" })
     int batchInsert(List<ToDo> list);
 }

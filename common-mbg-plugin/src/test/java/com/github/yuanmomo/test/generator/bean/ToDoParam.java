@@ -431,6 +431,81 @@ public class ToDoParam {
             addCriterion("remark not between", value1, value2, "remark");
             return (Criteria) this;
         }
+
+        public Criteria andTestColumnIsNull() {
+            addCriterion("test_column is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnIsNotNull() {
+            addCriterion("test_column is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnEqualTo(String value) {
+            addCriterion("test_column =", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnNotEqualTo(String value) {
+            addCriterion("test_column <>", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnGreaterThan(String value) {
+            addCriterion("test_column >", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnGreaterThanOrEqualTo(String value) {
+            addCriterion("test_column >=", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnLessThan(String value) {
+            addCriterion("test_column <", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnLessThanOrEqualTo(String value) {
+            addCriterion("test_column <=", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnLike(String value) {
+            addCriterion("test_column like", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnNotLike(String value) {
+            addCriterion("test_column not like", value, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnIn(List<String> values) {
+            addCriterion("test_column in", values, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnNotIn(List<String> values) {
+            addCriterion("test_column not in", values, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnBetween(String value1, String value2) {
+            addCriterion("test_column between", value1, value2, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnNotBetween(String value1, String value2) {
+            addCriterion("test_column not between", value1, value2, "testColumn");
+            return (Criteria) this;
+        }
+
+        public Criteria andTestColumnLikeInsensitive(String value) {
+            addCriterion("upper(test_column) like", value.toUpperCase(), "testColumn");
+            return (Criteria) this;
+        }
     }
 
     /**

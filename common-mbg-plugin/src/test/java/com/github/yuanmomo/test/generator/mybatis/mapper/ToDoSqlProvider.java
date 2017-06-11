@@ -58,6 +58,9 @@ public class ToDoSqlProvider {
         if (record.getRemark() != null) {
             sql.VALUES("remark", "#{remark,jdbcType=BIGINT}");
         }
+        if (record.getTestColumn() != null) {
+            sql.VALUES("test_column", "#{testColumn,jdbcType=VARCHAR}");
+        }
         return sql.toString();
     }
 
@@ -76,6 +79,7 @@ public class ToDoSqlProvider {
         }
         sql.SELECT("to_do");
         sql.SELECT("remark");
+        sql.SELECT("test_column");
         sql.FROM("table_to_do");
         applyWhere(sql, example, false);
         if (example != null && example.getOrderByClause() != null) {
@@ -116,6 +120,9 @@ public class ToDoSqlProvider {
         if (record.getRemark() != null) {
             sql.SET("remark = #{record.remark,jdbcType=BIGINT}");
         }
+        if (record.getTestColumn() != null) {
+            sql.SET("test_column = #{record.testColumn,jdbcType=VARCHAR}");
+        }
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -132,6 +139,7 @@ public class ToDoSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("to_do = #{record.toDo,jdbcType=INTEGER}");
         sql.SET("remark = #{record.remark,jdbcType=BIGINT}");
+        sql.SET("test_column = #{record.testColumn,jdbcType=VARCHAR}");
         ToDoParam example = (ToDoParam) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
@@ -151,6 +159,9 @@ public class ToDoSqlProvider {
         }
         if (record.getRemark() != null) {
             sql.SET("remark = #{remark,jdbcType=BIGINT}");
+        }
+        if (record.getTestColumn() != null) {
+            sql.SET("test_column = #{testColumn,jdbcType=VARCHAR}");
         }
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
         return sql.toString();
@@ -265,6 +276,7 @@ public class ToDoSqlProvider {
         }
         sql.SELECT("to_do");
         sql.SELECT("remark");
+        sql.SELECT("test_column");
         sql.FROM("table_to_do");
         applyWhere(sql, example, false);
         if (example != null && example.getOrderByClause() != null) {
