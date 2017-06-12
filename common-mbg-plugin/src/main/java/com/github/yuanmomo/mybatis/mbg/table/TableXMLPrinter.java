@@ -15,8 +15,8 @@ import java.util.List;
 
 /**
  * To run MBG(MyBatis Generator), a generatorConfig.xml file is needed. However , every table in
- * database has to config an xml element of <table></table> .
- * When comes to lots of tables, it will cost a lot of energy to write this <table></table> configuration.
+ * database has to config an xml element of &lt;table&gt;&lt;/table&gt; .
+ * When comes to lots of tables, it will cost a lot of energy to write this &lt;table&gt;&lt;/table&gt; configuration.
  * <p>
  * Here I provide a tool to generate these configurations for all the tables in single one database.
  */
@@ -27,7 +27,7 @@ public abstract class TableXMLPrinter {
     protected String password;
 
     /**
-     * whether printing the runtimeSchema <property></property> in <table></table>.
+     * whether printing the runtimeSchema &lt;property&gt;&lt;/property&gt; in &lt;table&gt;&lt;/table&gt;.
      */
     protected boolean isPrintSchema;
 
