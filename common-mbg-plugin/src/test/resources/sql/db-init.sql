@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `table_to_do` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `to_do` int(11) NOT NULL,
   `version` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `test_column` VARCHAR(16) unsigned NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
