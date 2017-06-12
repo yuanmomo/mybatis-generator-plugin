@@ -121,7 +121,7 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
             if (valuesClause.length() > 60) {
                 if (!iter.hasNext()) {
                     insertClause.append(')');
-                    valuesClause.append(')');
+                    valuesClause.append(")</foreach></script>");
                 }
                 insertClause.append("\","); //$NON-NLS-1$
                 valuesClause.append('\"');

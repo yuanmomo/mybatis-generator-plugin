@@ -1,11 +1,11 @@
 package com.github.yuanmomo.mybatis.mbg;
 
+import com.github.yuanmomo.mybatis.mbg.util.JavaFilesMergeUtil;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
-import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,6 @@ public class MyBatisGeneratorTool {
 			return;
 		}
 		
-		boolean overwrite = true;
 		logger.info("Current path is " + new File(".").getAbsolutePath());
 		File configFile = new File(generatorConfigPath);
 		ConfigurationParser cp = new ConfigurationParser(warnings);
@@ -41,7 +40,10 @@ public class MyBatisGeneratorTool {
 		} catch (XMLParserException e) {
 			e.printStackTrace();
 		}
-		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+		// whether overwrite specific Java files (like java models)
+		boolean overwrite = false;
+		boolean isMergeSupported= true;
+		JavaFilesMergeUtil callback = new JavaFilesMergeUtil(overwrite,isMergeSupported);
 		MyBatisGenerator myBatisGenerator = null;
 		try {
 			myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
