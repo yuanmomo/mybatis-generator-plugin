@@ -8,7 +8,9 @@ A few plugins to enhance the default MyBatis Generator.
  * Pagination.
  * A batchInsert method.
  * A selectOneByExample method etc.
- * Extra class for putting customize codes in case of overwriting by running MBG again.
+ * The generated Java class file merge plugin.
+
+  All the plugins are very useful to me. Especially the Java class file merge.
 
 ###&lt;table&gt; element generator
 
@@ -23,7 +25,19 @@ Here I provide a tool to generate these configurations for all the tables in sin
 
 # Usage
 
-### Plugin configuration
+### Add dependency
+###### Maven
+
+Add the follow xml configuration into your pom.xml file.
+
+```xml
+	<dependency>
+  		<groupId>com.github.yuanmomo</groupId>
+		<artifactId>common-mbg-plugin</artifactId>
+  		<version>1.0.0</version>
+	</dependency>
+```
+### Configure plugins
 ```xml
 <generatorConfiguration>
     ........
@@ -89,7 +103,7 @@ public class MySqlXMLGeneratorTest {
 	}
 }
 ```
-### MBG run util
+### MBG run tool
 ```java
 public class GeneratorMainTest {
 	@Test
