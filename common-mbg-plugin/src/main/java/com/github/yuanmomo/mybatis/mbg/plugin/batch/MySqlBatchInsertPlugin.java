@@ -16,8 +16,8 @@ public class MySqlBatchInsertPlugin extends PluginAdapter {
     public static String BATCH_INSERT_SELECTIVE_PROVIDER_METHOD_NAME = "batchInsert";
     /**
      *  Here should check if current database is MySql.
-     * @param warnings
-     * @return
+     * @param warnings warnings
+     * @return if true returned, the plugin will work .
      */
     @Override
     public boolean validate(List<String> warnings) {
@@ -27,10 +27,10 @@ public class MySqlBatchInsertPlugin extends PluginAdapter {
     /**
      * add selectOneByExample method.
      *
-     * @param interfaze
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
+     * @param interfaze     mapper interface file.
+     * @param topLevelClass  topLevelClass
+     * @param introspectedTable current table configurations.
+     * @return boolean  result
      */
     @Override
     public boolean clientGenerated(Interface interfaze,
@@ -49,8 +49,8 @@ public class MySqlBatchInsertPlugin extends PluginAdapter {
     /**
      *  Get configured method name.
      *
-     * @param properties
-     * @return
+     * @param properties configuration in xml file.
+     * @return the method name.
      */
     private static String getMethodName (Properties properties){
         String methodNameProp = properties.getProperty("methodName");

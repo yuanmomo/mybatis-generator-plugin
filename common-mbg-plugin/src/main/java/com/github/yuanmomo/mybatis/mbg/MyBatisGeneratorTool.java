@@ -22,6 +22,7 @@ public class MyBatisGeneratorTool {
 	 *  call MyBatis Generator method.
 	 *
 	 * @param generatorConfigPath  the path of generatorConfig.xml file. e.g: src/test/resources/generatorConfig.xml
+	 * @param warnings warnings
 	 */
 	public static void generate(String generatorConfigPath,List<String> warnings) {
 		if(generatorConfigPath == null || "".equals(generatorConfigPath.trim())){
@@ -63,7 +64,7 @@ public class MyBatisGeneratorTool {
 
 	/**
 	 *
-	 * @param generatorConfigPath
+	 * @param generatorConfigPath the config file path
 	 */
 	public static void generate(String generatorConfigPath) {
 		List<String> warnings = new ArrayList<String>();

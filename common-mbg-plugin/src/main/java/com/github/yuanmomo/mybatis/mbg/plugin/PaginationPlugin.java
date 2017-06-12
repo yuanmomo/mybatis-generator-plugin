@@ -22,9 +22,9 @@ public class PaginationPlugin extends PluginAdapter {
     /**
      * Add two fields start and count with default value of -1 into Criteria class.
      *
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
+     * @param topLevelClass   topLevelClass.
+     * @param introspectedTable current table configurations.
+     * @return boolean result
      */
     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass,
@@ -42,9 +42,9 @@ public class PaginationPlugin extends PluginAdapter {
     /**
      *  Modify the selectByExample element in the mapper xml file.
      *
-     * @param element
-     * @param introspectedTable
-     * @return
+     * @param element selectByExample element in xml file.
+     * @param introspectedTable current table configurations.
+     * @return boolean result
      */
     @Override
     public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(
@@ -68,10 +68,10 @@ public class PaginationPlugin extends PluginAdapter {
     /**
      * Modify the selectByExample in sql provider class.
      *
-     * @param method
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
+     * @param method  selectByExample method.
+     * @param topLevelClass topLevelClass
+     * @param introspectedTable current table configurations.
+     * @return boolean result
      */
     @Override
     public boolean providerSelectByExampleWithoutBLOBsMethodGenerated(
@@ -103,11 +103,11 @@ public class PaginationPlugin extends PluginAdapter {
     /**
      * Add a field into class both with setter and getter. <br/>
      *
-     * @param topLevelClass
-     * @param introspectedTable
-     * @param fieldType
-     * @param name
-     * @param initializationString
+     * @param topLevelClass topLevelClass
+     * @param introspectedTable current table configurations.
+     * @param fieldType  field type
+     * @param name  field name.
+     * @param initializationString  initializationString
      */
     private void addField(TopLevelClass topLevelClass,
                           IntrospectedTable introspectedTable,

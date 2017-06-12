@@ -47,18 +47,18 @@ public abstract class TableXMLPrinter {
     /**
      * Get the jdbc url.
      *
-     * @param ip
-     * @param port
-     * @param dbSchema
-     * @return
+     * @param ip the host ip.
+     * @param port database port
+     * @param dbSchema database schema.
+     * @return the jdbc url.
      */
     public abstract String getUrl(String ip, int port, String dbSchema);
 
     /**
      * loop the dbSchemaArray and print.
      *
-     * @param driver
-     * @param dbSchemaArray
+     * @param driver jdbc driver.
+     * @param dbSchemaArray database schema array.
      */
     public List<String> printWithDriver(
             String driver,
@@ -82,12 +82,11 @@ public abstract class TableXMLPrinter {
     /**
      * print single one database(scheme).
      *
-     * @param schema
-     * @param driver
-     * @param url
-     * @param user
-     * @param password
-     * @return
+     * @param driver jdbc driver
+     * @param url   jdbc url
+     * @param user   database username.
+     * @param password database password.
+     * @return tables xml configurations.
      */
     public List<String> printTables(String schema, String driver, String url, String user, String password) {
         List<String> output = new ArrayList<String>();

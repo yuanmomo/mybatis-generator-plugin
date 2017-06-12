@@ -33,6 +33,10 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
         super();
     }
 
+    /**
+     *
+     * @param interfaze the mapper interface.
+     */
     @Override
     public void addInterfaceElements(Interface interfaze) {
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();

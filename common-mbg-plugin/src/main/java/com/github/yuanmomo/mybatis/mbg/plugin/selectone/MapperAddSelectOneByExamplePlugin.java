@@ -25,10 +25,10 @@ public class MapperAddSelectOneByExamplePlugin extends PluginAdapter {
     /**
      * add selectOneByExample method.
      *
-     * @param interfaze
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
+     * @param interfaze   mapper interface.
+     * @param topLevelClass    topLevelClass
+     * @param introspectedTable current table configurations.
+     * @return boolean result
      */
     @Override
     public boolean clientGenerated(Interface interfaze,
@@ -47,9 +47,9 @@ public class MapperAddSelectOneByExamplePlugin extends PluginAdapter {
     /**
      * add selectOneByExample SqlProvider.
      *
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
+     * @param topLevelClass  topLevelClass
+     * @param introspectedTable current table configurations.
+     * @return boolean result
      */
     @Override
     public boolean providerGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -69,8 +69,8 @@ public class MapperAddSelectOneByExamplePlugin extends PluginAdapter {
     /**
      *  Get configured method name.
      *
-     * @param properties
-     * @return
+     * @param properties configuration in xml file.
+     * @return method name;
      */
     private static String getMethodName (Properties properties){
         String methodNameProp = properties.getProperty("methodName");
