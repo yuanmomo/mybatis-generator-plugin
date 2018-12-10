@@ -86,10 +86,12 @@ public class ToDoTest extends BaseTest {
             ToDo todo1 = new ToDo();
             todo1.setToDo(1);
             todo1.setRemark(1L +"");
+            todo1.setVersion(1L);
             toDoList.add(todo1);
 
             ToDo todo2 = new ToDo();
             todo2.setToDo(2);
+            todo2.setVersion(2L);
             todo2.setRemark(2L +"");
             toDoList.add(todo2);
 
