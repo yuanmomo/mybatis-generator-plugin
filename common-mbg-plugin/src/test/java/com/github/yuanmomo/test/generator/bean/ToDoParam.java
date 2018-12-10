@@ -372,6 +372,66 @@ public class ToDoParam {
             return (Criteria) this;
         }
 
+        public Criteria andVersionIsNull() {
+            addCriterion("version is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIsNotNull() {
+            addCriterion("version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionEqualTo(Long value) {
+            addCriterion("version =", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotEqualTo(Long value) {
+            addCriterion("version <>", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThan(Long value) {
+            addCriterion("version >", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionGreaterThanOrEqualTo(Long value) {
+            addCriterion("version >=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThan(Long value) {
+            addCriterion("version <", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionLessThanOrEqualTo(Long value) {
+            addCriterion("version <=", value, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionIn(List<Long> values) {
+            addCriterion("version in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotIn(List<Long> values) {
+            addCriterion("version not in", values, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionBetween(Long value1, Long value2) {
+            addCriterion("version between", value1, value2, "version");
+            return (Criteria) this;
+        }
+
+        public Criteria andVersionNotBetween(Long value1, Long value2) {
+            addCriterion("version not between", value1, value2, "version");
+            return (Criteria) this;
+        }
+
         public Criteria andRemarkIsNull() {
             addCriterion("remark is null");
             return (Criteria) this;
@@ -382,128 +442,128 @@ public class ToDoParam {
             return (Criteria) this;
         }
 
-        public Criteria andRemarkEqualTo(Long value) {
+        public Criteria andRemarkEqualTo(String value) {
             addCriterion("remark =", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotEqualTo(Long value) {
+        public Criteria andRemarkNotEqualTo(String value) {
             addCriterion("remark <>", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkGreaterThan(Long value) {
+        public Criteria andRemarkGreaterThan(String value) {
             addCriterion("remark >", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkGreaterThanOrEqualTo(Long value) {
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
             addCriterion("remark >=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLessThan(Long value) {
+        public Criteria andRemarkLessThan(String value) {
             addCriterion("remark <", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLessThanOrEqualTo(Long value) {
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
             addCriterion("remark <=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkIn(List<Long> values) {
+        public Criteria andRemarkLike(String value) {
+            addCriterion("remark like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("remark not like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIn(List<String> values) {
             addCriterion("remark in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotIn(List<Long> values) {
+        public Criteria andRemarkNotIn(List<String> values) {
             addCriterion("remark not in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkBetween(Long value1, Long value2) {
+        public Criteria andRemarkBetween(String value1, String value2) {
             addCriterion("remark between", value1, value2, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotBetween(Long value1, Long value2) {
+        public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("remark not between", value1, value2, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnIsNull() {
-            addCriterion("test_column is null");
+        public Criteria andLiBinHuiIsNull() {
+            addCriterion("li_bin_hui is null");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnIsNotNull() {
-            addCriterion("test_column is not null");
+        public Criteria andLiBinHuiIsNotNull() {
+            addCriterion("li_bin_hui is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnEqualTo(String value) {
-            addCriterion("test_column =", value, "testColumn");
+        public Criteria andLiBinHuiEqualTo(Long value) {
+            addCriterion("li_bin_hui =", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnNotEqualTo(String value) {
-            addCriterion("test_column <>", value, "testColumn");
+        public Criteria andLiBinHuiNotEqualTo(Long value) {
+            addCriterion("li_bin_hui <>", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnGreaterThan(String value) {
-            addCriterion("test_column >", value, "testColumn");
+        public Criteria andLiBinHuiGreaterThan(Long value) {
+            addCriterion("li_bin_hui >", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnGreaterThanOrEqualTo(String value) {
-            addCriterion("test_column >=", value, "testColumn");
+        public Criteria andLiBinHuiGreaterThanOrEqualTo(Long value) {
+            addCriterion("li_bin_hui >=", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnLessThan(String value) {
-            addCriterion("test_column <", value, "testColumn");
+        public Criteria andLiBinHuiLessThan(Long value) {
+            addCriterion("li_bin_hui <", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnLessThanOrEqualTo(String value) {
-            addCriterion("test_column <=", value, "testColumn");
+        public Criteria andLiBinHuiLessThanOrEqualTo(Long value) {
+            addCriterion("li_bin_hui <=", value, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnLike(String value) {
-            addCriterion("test_column like", value, "testColumn");
+        public Criteria andLiBinHuiIn(List<Long> values) {
+            addCriterion("li_bin_hui in", values, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnNotLike(String value) {
-            addCriterion("test_column not like", value, "testColumn");
+        public Criteria andLiBinHuiNotIn(List<Long> values) {
+            addCriterion("li_bin_hui not in", values, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnIn(List<String> values) {
-            addCriterion("test_column in", values, "testColumn");
+        public Criteria andLiBinHuiBetween(Long value1, Long value2) {
+            addCriterion("li_bin_hui between", value1, value2, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnNotIn(List<String> values) {
-            addCriterion("test_column not in", values, "testColumn");
+        public Criteria andLiBinHuiNotBetween(Long value1, Long value2) {
+            addCriterion("li_bin_hui not between", value1, value2, "liBinHui");
             return (Criteria) this;
         }
 
-        public Criteria andTestColumnBetween(String value1, String value2) {
-            addCriterion("test_column between", value1, value2, "testColumn");
-            return (Criteria) this;
-        }
-
-        public Criteria andTestColumnNotBetween(String value1, String value2) {
-            addCriterion("test_column not between", value1, value2, "testColumn");
-            return (Criteria) this;
-        }
-
-        public Criteria andTestColumnLikeInsensitive(String value) {
-            addCriterion("upper(test_column) like", value.toUpperCase(), "testColumn");
+        public Criteria andRemarkLikeInsensitive(String value) {
+            addCriterion("upper(remark) like", value.toUpperCase(), "remark");
             return (Criteria) this;
         }
     }
