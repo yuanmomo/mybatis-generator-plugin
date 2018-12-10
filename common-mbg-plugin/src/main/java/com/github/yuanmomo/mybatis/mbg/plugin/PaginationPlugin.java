@@ -1,4 +1,6 @@
 package com.github.yuanmomo.mybatis.mbg.plugin;
+import java.util.List;
+
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -12,11 +14,8 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
-import java.util.List;
-
 /**
  * @author Hongbin Yuan
- * @date 2011-11-30 下午08:36:11
  */
 public class PaginationPlugin extends PluginAdapter {
     /**
