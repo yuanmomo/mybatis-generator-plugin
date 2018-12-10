@@ -148,7 +148,7 @@ public class JavaFilesMergeUtil extends DefaultShellCallback {
                             resultsAnnotation.get().remove();
 
                             // add new Results
-                            BodyDeclaration selectByExample = findMBGMethod(newFileCU, "selectByExample");
+                            BodyDeclaration selectByExample = findMBGMethod(newFileCU, "selectByPrimaryKey");
 
                             Optional<AnnotationExpr> newResultsAnnotation = selectByExample.getAnnotationByName(Results.class.getSimpleName());
                             if(newResultsAnnotation.isPresent()){
