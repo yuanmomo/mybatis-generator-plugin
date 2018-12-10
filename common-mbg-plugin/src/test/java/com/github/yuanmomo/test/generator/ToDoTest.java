@@ -1,13 +1,5 @@
 package com.github.yuanmomo.test.generator;
 
-import com.github.yuanmomo.test.generator.bean.ToDo;
-import com.github.yuanmomo.test.generator.bean.ToDoParam;
-import com.github.yuanmomo.test.generator.mybatis.mapper.ToDoMapper;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.ibatis.session.SqlSession;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -17,6 +9,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.github.yuanmomo.test.generator.bean.ToDo;
+import com.github.yuanmomo.test.generator.bean.ToDoParam;
+import com.github.yuanmomo.test.generator.mybatis.mapper.ToDoMapper;
 
 /**
  * Created by Hongbin.Yuan on 2017-06-09 02:49.
@@ -33,7 +34,7 @@ public class ToDoTest extends BaseTest {
             ToDoMapper mapper = sqlSession.getMapper(ToDoMapper.class);
             ToDo todo = new ToDo();
             todo.setId(1L);
-            todo.setRemark(888L);
+            todo.setRemark("888");
             todo.setToDo(7777);
             Assert.assertTrue(mapper.insertSelective(todo) > 0);
 
@@ -57,6 +58,25 @@ public class ToDoTest extends BaseTest {
     }
 
     @Test
+    public void testSelect2() {
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
+        try {
+            execBeforeCase("todo.sql");
+
+            ToDo toDo = sqlSession.getMapper(ToDoMapper.class).select(111111111L);
+            System.out.println(toDo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            sqlSession.rollback(true);
+            sqlSession.close();
+        }
+    }
+
+    @Test
     public void testBatchInsert() {
         SqlSession sqlSession = sqlSessionFactory.openSession(false);
         try {
@@ -65,12 +85,12 @@ public class ToDoTest extends BaseTest {
             List<ToDo> toDoList = new ArrayList<>();
             ToDo todo1 = new ToDo();
             todo1.setToDo(1);
-            todo1.setRemark(1L);
+            todo1.setRemark(1L +"");
             toDoList.add(todo1);
 
             ToDo todo2 = new ToDo();
             todo2.setToDo(2);
-            todo2.setRemark(2L);
+            todo2.setRemark(2L +"");
             toDoList.add(todo2);
 
             int count = mapper.batchInsert(toDoList);
@@ -139,13 +159,13 @@ public class ToDoTest extends BaseTest {
             // test insert
             ToDo todo = new ToDo();
             todo.setToDo(1);
-            todo.setRemark(1L);
+            todo.setRemark(1L +"");
             todo.setChild("child");
             int count = mapper.insertSelective(todo);
             Assert.assertTrue(count == 1);
 
             ToDoParam param = new ToDoParam();
-            param.createCriteria().andRemarkEqualTo(1L).andToDoEqualTo(1);
+            param.createCriteria().andRemarkEqualTo(1L +"").andToDoEqualTo(1);
             ToDo inserted = mapper.selectOneByExample(param);
             Assert.assertEquals(todo.getToDo(),inserted.getToDo());
             Assert.assertEquals(todo.getRemark(),inserted.getRemark());
@@ -161,12 +181,12 @@ public class ToDoTest extends BaseTest {
 
             // test update
             child.setToDo(2);
-            child.setRemark(2L);
+            child.setRemark(2L +"");
             count = mapper.updateByPrimaryKeySelective(child);
             Assert.assertTrue(count == 1);
 
             param.clear();
-            param.createCriteria().andRemarkEqualTo(2L).andToDoEqualTo(2);
+            param.createCriteria().andRemarkEqualTo(2L +"").andToDoEqualTo(2);
             ToDo updated = mapper.selectOneByExample(param);
             Assert.assertEquals(child.getToDo(),updated.getToDo());
             Assert.assertEquals(child.getRemark(),updated.getRemark());

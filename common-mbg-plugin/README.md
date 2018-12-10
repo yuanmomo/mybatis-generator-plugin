@@ -25,19 +25,7 @@ Here I provide a tool to generate these configurations for all the tables in sin
 
 # Usage
 
-### Add dependency
-###### Maven
-
-Add the follow xml configuration into your pom.xml file.
-
-```xml
-	<dependency>
-  		<groupId>com.github.yuanmomo</groupId>
-		<artifactId>common-mbg-plugin</artifactId>
-  		<version>1.0.0</version>
-	</dependency>
-```
-### Configure plugins
+### Plugin configuration
 ```xml
 <generatorConfiguration>
     ........

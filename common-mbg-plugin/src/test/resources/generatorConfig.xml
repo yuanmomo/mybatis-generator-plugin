@@ -49,6 +49,9 @@
             <property name="typeName" value="DAO"/>
         </plugin>
 
+        <!-- Add a String field includes all columns. -->
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.allfields.AllColumnsFieldsPlugin" />
+
         <!-- suppress date in generated comment -->
         <commentGenerator>
             <property name="suppressDate" value="true"/>
