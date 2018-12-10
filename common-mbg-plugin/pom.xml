@@ -4,14 +4,14 @@
     <parent>
         <groupId>com.github.yuanmomo</groupId>
         <artifactId>mybatis-generator-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common-mbg-plugin</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <name>common-mbg-plugin</name>
     <description>
