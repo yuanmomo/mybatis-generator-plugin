@@ -4,6 +4,12 @@ package com.github.yuanmomo.mybatis.mbg.plugin.selectone;
  * Created by Hongbin.Yuan on 2017-06-09 00:33.
  */
 
+import static org.mybatis.generator.api.dom.OutputUtilities.javaIndent;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
@@ -11,12 +17,6 @@ import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.SelectByExampleWithoutBLOBsMethodGenerator;
-
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
-
-import static org.mybatis.generator.api.dom.OutputUtilities.javaIndent;
 
 public class AnnotatedSelectOneByExampleWithoutBLOBsMethodGenerator extends
         SelectByExampleWithoutBLOBsMethodGenerator {
@@ -82,7 +82,7 @@ public class AnnotatedSelectOneByExampleWithoutBLOBsMethodGenerator extends
         }
 
         Iterator<IntrospectedColumn> iterPk = introspectedTable.getPrimaryKeyColumns().iterator();
-        Iterator<IntrospectedColumn> iterNonPk = introspectedTable.getBaseColumns().iterator();
+        Iterator<IntrospectedColumn> iterNonPk = introspectedTable.getNonPrimaryKeyColumns().iterator();
         while (iterPk.hasNext()) {
             IntrospectedColumn introspectedColumn = iterPk.next();
             sb.setLength(0);
