@@ -6,7 +6,7 @@
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.5</version>
+    <version>1.0.4</version>
 
     <modules>
         <module>common-mbg-plugin</module>
