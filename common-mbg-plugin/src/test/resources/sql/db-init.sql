@@ -27,13 +27,14 @@ USE `todo`;
 -- table `table_to_do`
 --
 
-CREATE TABLE IF NOT EXISTS `table_to_do` (
+CREATE TABLE `table_to_do` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `to_do` int(11) NOT NULL,
-  `version` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `remark` VARCHAR(16) NULL DEFAULT '',
+  `version` bigint(20) unsigned NULL DEFAULT '0',
+  `remark` varchar(16) DEFAULT '',
+  `long_text` text CHARACTER SET utf8mb4,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

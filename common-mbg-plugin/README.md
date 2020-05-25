@@ -7,7 +7,7 @@ A few plugins to enhance the default MyBatis Generator.
 ### Plugins list
  * Pagination.
  * A batchInsert method.
- * A selectOneByExample method etc.
+ * A getOneByExample method etc.
  * The generated Java class file merge plugin.
 
   All the plugins are very useful to me. Especially the Java class file merge.
@@ -32,12 +32,12 @@ Here I provide a tool to generate these configurations for all the tables in sin
     <context>
         ......
 
-        <!-- add an extra selectOneByExample method into mapper class -->
-        <plugin type="net.yuanmomo.mybatis.mbg.plugin.selectone.MapperAddSelectOneByExamplePlugin">
+        <!-- add an extra getOneByExample method into mapper class -->
+        <plugin type="net.yuanmomo.mybatis.mbg.plugin.getone.MapperAddGetOneByExamplePlugin">
             <property name="methodName" value="getOneByExample"/>
         </plugin>
 
-        <!-- add an extra selectOneByExample method into mapper class -->
+        <!-- add an extra getOneByExample method into mapper class -->
         <plugin type="net.yuanmomo.mybatis.mbg.plugin.batch.MySqlBatchInsertPlugin">
             <property name="methodName" value="batchInsert"/>
         </plugin>

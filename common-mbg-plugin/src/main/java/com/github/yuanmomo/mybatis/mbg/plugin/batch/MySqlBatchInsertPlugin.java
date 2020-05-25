@@ -1,13 +1,12 @@
 package com.github.yuanmomo.mybatis.mbg.plugin.batch;
 
+import java.util.List;
+import java.util.Properties;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-
-import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by Hongbin.Yuan on 2017-06-09 16:13.
@@ -25,16 +24,15 @@ public class MySqlBatchInsertPlugin extends PluginAdapter {
     }
 
     /**
-     * add selectOneByExample method.
+     * Add batch insert method.
      *
      * @param interfaze     mapper interface file.
-     * @param topLevelClass  topLevelClass
      * @param introspectedTable current table configurations.
      * @return boolean  result
      */
     @Override
     public boolean clientGenerated(Interface interfaze,
-                                   TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+                                   IntrospectedTable introspectedTable) {
         AnnotatedBatchInsertSelectiveMethodGenerator annotatedBatchInsertSelectiveMethodGenerator
                 = new AnnotatedBatchInsertSelectiveMethodGenerator();
 

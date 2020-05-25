@@ -1,13 +1,12 @@
 package com.github.yuanmomo.mybatis.mbg.plugin;
 
+import java.util.List;
+
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-
-import java.util.List;
 
 public class MapperExceptionPlugin extends PluginAdapter {
 	
@@ -26,8 +25,7 @@ public class MapperExceptionPlugin extends PluginAdapter {
 	}
 
 	@Override
-	public boolean clientGenerated(Interface interfaze,
-                                   TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+	public boolean clientGenerated(Interface interfaze,IntrospectedTable introspectedTable) {
 		List<Method> methodList = interfaze.getMethods();
 		if(methodList !=null && methodList.size()>0){
 			for(Method m : methodList){

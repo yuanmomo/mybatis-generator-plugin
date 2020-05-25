@@ -114,10 +114,8 @@ public class PaginationPlugin extends PluginAdapter {
                           String initializationString) {
         CommentGenerator commentGenerator = context.getCommentGenerator();
         // add field
-        Field field = new Field();
+        Field field = new Field(name,fieldType);
         field.setVisibility(JavaVisibility.PROTECTED);
-        field.setType(fieldType);
-        field.setName(name);
         field.setInitializationString(initializationString);
         commentGenerator.addFieldComment(field, introspectedTable);
         topLevelClass.addField(field);
@@ -127,19 +125,17 @@ public class PaginationPlugin extends PluginAdapter {
         String camel = Character.toUpperCase(c) + name.substring(1);
 
         // add setter
-        Method method = new Method();
+        Method method = new Method("set" + camel);
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.setName("set" + camel);
         method.addParameter(new Parameter(fieldType, name));
         method.addBodyLine("this." + name + "=" + name + ";");
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
         // add getter
-        method = new Method();
+        method = new Method("get" + camel);
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setReturnType(fieldType);
-        method.setName("get" + camel);
         method.addBodyLine("return " + name + ";");
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);

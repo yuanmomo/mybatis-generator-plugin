@@ -1,5 +1,20 @@
 package com.github.yuanmomo.mybatis.mbg.plugin.batch;
 
+import static org.mybatis.generator.api.dom.OutputUtilities.javaIndent;
+import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities.getEscapedColumnName;
+import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities.getParameterClause;
+import static org.mybatis.generator.internal.util.StringUtility.escapeStringForJava;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Options;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
@@ -9,16 +24,7 @@ import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.codegen.mybatis3.ListUtilities;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.InsertSelectiveMethodGenerator;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import static org.mybatis.generator.api.dom.OutputUtilities.javaIndent;
-import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities.getEscapedColumnName;
-import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities.getParameterClause;
-import static org.mybatis.generator.internal.util.StringUtility.escapeStringForJava;
+import com.github.yuanmomo.mybatis.mbg.plugin.MultiplyTable.MultiplyTablePlugin;
 
 /**
  * Created by Hongbin.Yuan on 2017-06-09 16:31.
@@ -41,11 +47,11 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
     public void addInterfaceElements(Interface interfaze) {
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
 
-        Method method = new Method();
+        Method method = new Method(methodName);
 
         method.setReturnType(FullyQualifiedJavaType.getIntInstance());
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.setName(methodName);
+        method.setAbstract(true);
 
         // set parameter List<T> xxx
         FullyQualifiedJavaType listType = new FullyQualifiedJavaType(introspectedTable
@@ -60,16 +66,29 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
 
         context.getCommentGenerator().addGeneralMethodComment(method,
                 introspectedTable);
-        addMapperAnnotations(interfaze, method);
+
+        interfaze.addImportedType(new FullyQualifiedJavaType(InsertProvider.class.getName())); //$NON-NLS-1$
+        interfaze.addImportedType(new FullyQualifiedJavaType(Options.class.getName())); //$NON-NLS-1$
+        interfaze.addImportedType(new FullyQualifiedJavaType(Insert.class.getName())); //$NON-NLS-1$
+
+        addMapperAnnotations( method);
+
+        if (MultiplyTablePlugin.MULTIPLY_TABLE_ACTIVE){
+            MultiplyTablePlugin.mapperAddTableNameParameter(method, interfaze, introspectedTable);
+
+            String tableName = escapeStringForJava(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+            MultiplyTablePlugin.mapperReplaceAnnotationLine(method,
+                    Pair.of(String.format("into %s", tableName), "into \\$\\{tableName\\}"),
+                    Pair.of("keyProperty=\"id\"", "keyProperty=\"list.id\"")
+            );
+        }
 
         interfaze.addMethod(method);
     }
 
     @Override
-    public void addMapperAnnotations(Interface interfaze, Method method) {
+    public void addMapperAnnotations(Method method) {
         FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(introspectedTable.getMyBatis3SqlProviderType());
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.InsertProvider")); //$NON-NLS-1$
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Options")); //$NON-NLS-1$
 
         // get java property name and column name
         List<IntrospectedColumn> introspectedColumns = introspectedTable
@@ -83,12 +102,6 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
             method.addAnnotation(optionAnnotation);
         }
 
-        // set the foreach xml annotation
-        /**
-
-         */
-
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Insert")); //$NON-NLS-1$
 
         method.addAnnotation("@Insert({"); //$NON-NLS-1$
         method.addAnnotation("\"<script>\","); //$NON-NLS-1$
@@ -158,6 +171,7 @@ public class AnnotatedBatchInsertSelectiveMethodGenerator extends
         for (String clause : valuesClauses) {
             method.addAnnotation(clause);
         }
+
 
         method.addAnnotation("})");
 

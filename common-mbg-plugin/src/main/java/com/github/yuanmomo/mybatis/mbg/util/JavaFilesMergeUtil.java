@@ -1,5 +1,6 @@
 package com.github.yuanmomo.mybatis.mbg.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
@@ -62,15 +63,16 @@ public class JavaFilesMergeUtil extends DefaultShellCallback {
         return overwrite;
     }
 
+
     @Override
     public String mergeJavaFile(String newFileSource,
-                                String existingFileFullPath, String[] javadocTags, String fileEncoding)
-            throws ShellException {
-
+                                File existingFile,
+                                String[] javadocTags,
+                                String fileEncoding) throws ShellException {
         // parse the files
         FileInputStream existingFileInputStream = null;
         try {
-            existingFileInputStream = new FileInputStream(existingFileFullPath);
+            existingFileInputStream = new FileInputStream(existingFile);
         } catch (FileNotFoundException e) {
             return null;
         }
@@ -176,7 +178,7 @@ public class JavaFilesMergeUtil extends DefaultShellCallback {
                         || member instanceof ConstructorDeclaration ) { //  constructor
                     NodeWithJavadoc field = (NodeWithJavadoc) member;
                     Optional<Javadoc> javadocOptional = field.getJavadoc();
-                    if(javadocOptional != null && javadocOptional.get() != null) {
+                    if(javadocOptional.isPresent()) {
                         Javadoc javadoc = javadocOptional.get();
                         if(javadoc != null
                                 && javadoc.getBlockTags() != null

@@ -1,4 +1,4 @@
-package com.github.yuanmomo.mybatis.mbg.plugin.selectone;
+package com.github.yuanmomo.mybatis.mbg.plugin.getone;
 
 import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities.getSelectListPhrase;
 import static org.mybatis.generator.internal.util.StringUtility.escapeStringForJava;
@@ -15,11 +15,14 @@ import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.mybatis3.javamapper.elements.sqlprovider.AbstractJavaProviderMethodGenerator;
 
-public class ProviderSelectOneByExampleWithoutBLOBsMethodGenerator extends AbstractJavaProviderMethodGenerator {
+import com.github.yuanmomo.mybatis.mbg.plugin.MultiplyTable.MethodTypeEnum;
+import com.github.yuanmomo.mybatis.mbg.plugin.MultiplyTable.MultiplyTablePlugin;
+
+public class ProviderGetOneByExampleWithoutBLOBsMethodGenerator extends AbstractJavaProviderMethodGenerator {
 
     private String methodName;
 
-    public ProviderSelectOneByExampleWithoutBLOBsMethodGenerator(boolean useLegacyBuilder) {
+    public ProviderGetOneByExampleWithoutBLOBsMethodGenerator(boolean useLegacyBuilder) {
         super(useLegacyBuilder);
     }
 
@@ -78,6 +81,11 @@ public class ProviderSelectOneByExampleWithoutBLOBsMethodGenerator extends Abstr
         method.addBodyLine("StringBuilder sqlBuilder = new StringBuilder(sql.toString());");
         method.addBodyLine("sqlBuilder.append(\" limit 1 \");");
         method.addBodyLine("return sqlBuilder.toString();"); //$NON-NLS-1$
+
+        //
+        if (MultiplyTablePlugin.MULTIPLY_TABLE_ACTIVE){
+            MultiplyTablePlugin.providerChangeMethodParameterToMap(MethodTypeEnum.EXAMPLE,method,topLevelClass,introspectedTable);
+        }
 
         topLevelClass.addMethod(method);
     }

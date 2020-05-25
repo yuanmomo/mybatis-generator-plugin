@@ -1,6 +1,12 @@
 package com.github.yuanmomo.mybatis.mbg;
 
-import com.github.yuanmomo.mybatis.mbg.util.JavaFilesMergeUtil;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -9,11 +15,7 @@ import org.mybatis.generator.exception.XMLParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import com.github.yuanmomo.mybatis.mbg.util.JavaFilesMergeUtil;
 
 public class MyBatisGeneratorTool {
 	private static Logger logger = LoggerFactory.getLogger(MyBatisGeneratorTool.class);
@@ -24,8 +26,8 @@ public class MyBatisGeneratorTool {
 	 * @param generatorConfigPath  the path of generatorConfig.xml file. e.g: src/test/resources/generatorConfig.xml
 	 * @param warnings warnings
 	 */
-	public static void generate(String generatorConfigPath,List<String> warnings) {
-		if(generatorConfigPath == null || "".equals(generatorConfigPath.trim())){
+	public static void generate(String generatorConfigPath, List<String> warnings) {
+		if (StringUtils.isBlank(generatorConfigPath)) {
 			logger.error("GeneratorConfig.xml location null.");
 			return;
 		}

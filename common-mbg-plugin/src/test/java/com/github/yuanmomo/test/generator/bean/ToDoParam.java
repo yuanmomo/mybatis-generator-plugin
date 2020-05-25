@@ -52,7 +52,7 @@ public class ToDoParam {
      * @mbg.generated
      */
     public ToDoParam() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     /**
@@ -216,7 +216,7 @@ public class ToDoParam {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {
@@ -499,66 +499,6 @@ public class ToDoParam {
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("remark not between", value1, value2, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiIsNull() {
-            addCriterion("li_bin_hui is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiIsNotNull() {
-            addCriterion("li_bin_hui is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiEqualTo(Long value) {
-            addCriterion("li_bin_hui =", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiNotEqualTo(Long value) {
-            addCriterion("li_bin_hui <>", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiGreaterThan(Long value) {
-            addCriterion("li_bin_hui >", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiGreaterThanOrEqualTo(Long value) {
-            addCriterion("li_bin_hui >=", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiLessThan(Long value) {
-            addCriterion("li_bin_hui <", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiLessThanOrEqualTo(Long value) {
-            addCriterion("li_bin_hui <=", value, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiIn(List<Long> values) {
-            addCriterion("li_bin_hui in", values, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiNotIn(List<Long> values) {
-            addCriterion("li_bin_hui not in", values, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiBetween(Long value1, Long value2) {
-            addCriterion("li_bin_hui between", value1, value2, "liBinHui");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiBinHuiNotBetween(Long value1, Long value2) {
-            addCriterion("li_bin_hui not between", value1, value2, "liBinHui");
             return (Criteria) this;
         }
 

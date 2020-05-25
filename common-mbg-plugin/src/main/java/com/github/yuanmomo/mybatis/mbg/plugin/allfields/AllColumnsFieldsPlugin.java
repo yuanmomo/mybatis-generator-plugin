@@ -30,12 +30,10 @@ public class AllColumnsFieldsPlugin extends PluginAdapter {
 
     @Override
     public boolean providerGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        Field field = new Field();
+        Field field = new Field("ALL_COLUMN_FIELDS",FullyQualifiedJavaType.getStringInstance());
         field.setVisibility(JavaVisibility.PUBLIC);
         field.setStatic(true);
         field.setFinal(true);
-        field.setType(FullyQualifiedJavaType.getStringInstance());
-        field.setName("ALL_COLUMN_FIELDS");
 
         List<IntrospectedColumn> allColumns = introspectedTable.getAllColumns();
         if(allColumns == null || allColumns.size() == 0){

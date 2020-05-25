@@ -13,7 +13,7 @@
     <context id="mbg_schema" targetRuntime="MyBatis3" defaultModelType="conditional">
 
         <!-- A plugin for generating hashCode and equals methods. -->
-        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
 
         <!-- A plugin for making the bean classes extends java.io.Serializable interface. -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
@@ -22,7 +22,7 @@
         <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
 
         <!-- A plugin for generating toString method. -->
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
 
         <!-- Rename the example classes. -->
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -31,8 +31,8 @@
         </plugin>
 
         <!-- ******************************* customize plugins ******************************* -->
-        <!-- add an extra selectOneByExample method into mapper class -->
-        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.selectone.MapperAddSelectOneByExamplePlugin">
+        <!-- add an extra getOneByExample method into mapper class -->
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.getone.MapperAddGetOneByExamplePlugin">
             <property name="methodName" value="getOneByExample"/>
         </plugin>
 
@@ -45,12 +45,26 @@
         <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.PaginationPlugin"/>
 
         <!-- Extra DAO interface. -->
-        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.DAOPlugin">
-            <property name="typeName" value="DAO"/>
-        </plugin>
+        <!--        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.DAOPlugin">-->
+        <!--            <property name="typeName" value="DAO"/>-->
+        <!--        </plugin>-->
 
         <!-- Add a String field includes all columns. -->
-        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.allfields.AllColumnsFieldsPlugin" />
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.allfields.AllColumnsFieldsPlugin"/>
+
+
+        <!-- Add Lombok support. -->
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.LombokPlugin">
+            <property name="data" value="true"/>
+            <property name="hashEquals" value="true"/>
+            <property name="toString" value="true"/>
+            <property name="noArgConstructor" value="true"/>
+        </plugin>
+
+        <!-- Generate simple objects. -->
+        <!--        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.SimplePlugin" />-->
+
+        <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.MultiplyTable.MultiplyTablePlugin"/>
 
         <!-- suppress date in generated comment -->
         <commentGenerator>
@@ -74,11 +88,11 @@
             <!--<property name="enableSubPackages" value="true"/>-->
         </javaModelGenerator>
 
-         <!--mapper xml configuration (replaced by provider class) -->
-        <!--<sqlMapGenerator targetPackage="${mbg.sqlMapPackage}"-->
-        <!--targetProject="${mbg.targetProject}">-->
-        <!--<property name="enableSubPackages" value="true" />-->
-        <!--</sqlMapGenerator>-->
+        <!--mapper xml configuration (replaced by provider class) -->
+        <sqlMapGenerator targetPackage="${mbg.sqlMapPackage}"
+                         targetProject="${mbg.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
 
         <!-- mapper interface configuration, also provider classes -->
         <javaClientGenerator type="ANNOTATEDMAPPER"
