@@ -269,6 +269,12 @@ public class GenerateTool {
 
 ## 动态表名
 ### Mapper 接口
-![mappder-dynamic-table-name](https://img.tupm.net/2020/06/21A0CF4126FA2A93605D67B7E14D9E11.jpg)
+![mappder-dynamic-table-name](https://img.tupm.net/2020/06/7D7CFA300B2214D1C18CB3E164BAF3B3.jpg)
+
 ### Provider 类
-![provider-dynamic-table-name](https://img.tupm.net/2020/06/C4FDEE8276EC32A6343359F755D9397C.jpg)
+![provider-dynamic-table-name](https://img.tupm.net/2020/06/35D2D9D32A20E0F67EDB0DB1689AB037.jpg)
+
+# 使用示例
+
+参考：[https://github.com/yuanmomo/mybatis-generator-plugin-demo](https://github.com/yuanmomo/mybatis-generator-plugin-demo) 
+
