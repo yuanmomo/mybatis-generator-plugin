@@ -7,6 +7,7 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+mybatis-generator-plugin-test
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -69,3 +70,6 @@ hs_err_pid*
 
 # log
 systemLog/*
+**/custom/*.java
+**/custom/*.xml
+**/custom/*.properties

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.4</version>
-
-    <modules>
-        <module>common-mbg-plugin</module>
-    </modules>
+    <packaging>jar</packaging>
+    <version>1.0.9</version>
 
     <name>mybatis-generator-plugin</name>
     <description>
-        A few plugins to enhance MBG(MyBatis Generator).
-        Generate code for Spring Boot for business and controller code.
+        A few common plugins to enhance MBG(MyBatis Generator), for basic use.
     </description>
     <url>https://github.com/yuanmomo/mybatis-generator-plugin</url>
 
@@ -26,11 +22,11 @@
         </license>
     </licenses>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
 
     <developers>
@@ -45,64 +41,48 @@
         <developerConnection>https://github.com/yuanmomo/mybatis-generator-plugin.git</developerConnection>
         <url>https://github.com/yuanmomo/mybatis-generator-plugin</url>
     </scm>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.25</version>
-            </dependency>
 
-            <!-- MBG only compile -->
-            <dependency>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
-                <version>1.3.5</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>3.4.4</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.javaparser</groupId>
-                <artifactId>javaparser-core</artifactId>
-                <version>3.2.7</version>
-            </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+            <scope>compile</scope>
+        </dependency>
 
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.5</version>
-            </dependency>
+        <!-- MBG only compile -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.5</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.dynamic-sql</groupId>-->
+<!--            <artifactId>mybatis-dynamic-sql</artifactId>-->
+<!--            <version>1.1.4</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+            <version>3.2.7</version>
+        </dependency>
 
-            <!-- mysql connector java for unit test -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.41</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>1.9.3</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+    </dependencies>
 
 
     <build>
@@ -197,4 +177,12 @@
             </distributionManagement>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
 </project>
