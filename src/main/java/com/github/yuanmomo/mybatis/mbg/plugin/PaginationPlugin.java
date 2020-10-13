@@ -1,4 +1,5 @@
 package com.github.yuanmomo.mybatis.mbg.plugin;
+
 import java.util.List;
 
 import org.mybatis.generator.api.CommentGenerator;
@@ -13,15 +14,17 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.internal.util.JavaBeansUtil;
 
 /**
  * @author Hongbin Yuan
  */
 public class PaginationPlugin extends PluginAdapter {
+
     /**
      * Add two fields start and count with default value of -1 into Criteria class.
      *
-     * @param topLevelClass   topLevelClass.
+     * @param topLevelClass     topLevelClass.
      * @param introspectedTable current table configurations.
      * @return boolean result
      */
@@ -34,20 +37,41 @@ public class PaginationPlugin extends PluginAdapter {
         // add field, getter, setter for limit count clause
         this.addField(topLevelClass, introspectedTable,
                 new FullyQualifiedJavaType("long"), "count", "-1");
-        return super.modelExampleClassGenerated(topLevelClass,
-                introspectedTable);
+        return true;
     }
 
     /**
-     *  Modify the selectByExample element in the mapper xml file.
+     * Modify the selectByExample element in the mapper xml file.
      *
-     * @param element selectByExample element in xml file.
+     * @param element           selectByExample element in xml file.
      * @param introspectedTable current table configurations.
      * @return boolean result
      */
     @Override
     public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(
             XmlElement element, IntrospectedTable introspectedTable) {
+        this.addPaginationInXml(element);
+        return true;
+    }
+    /**
+     * Modify the selectByExampleWithBlobs element in the mapper xml file.
+     *
+     * @param element           selectByExampleWithBlobs element in xml file.
+     * @param introspectedTable current table configurations.
+     * @return boolean result
+     */
+    @Override
+    public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(
+            XmlElement element, IntrospectedTable introspectedTable) {
+        this.addPaginationInXml(element);
+        return true;
+    }
+    /**
+     * Append pagination to method in xml.
+     *
+     * @param element append pagination code to method.
+     */
+    private void addPaginationInXml(XmlElement element) {
         // add start field
         XmlElement limitStartElement = new XmlElement("if");
         limitStartElement.addAttribute(new Attribute("test", "start &gt;= 0 "));
@@ -59,16 +83,13 @@ public class PaginationPlugin extends PluginAdapter {
         limitEndElement.addAttribute(new Attribute("test", "count &gt;= 0 "));
         limitEndElement.addElement(new TextElement(",${count}"));
         element.addElement(limitEndElement);
-
-        return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element,
-                introspectedTable);
     }
 
     /**
      * Modify the selectByExample in sql provider class.
      *
-     * @param method  selectByExample method.
-     * @param topLevelClass topLevelClass
+     * @param method            selectByExample method.
+     * @param topLevelClass     topLevelClass
      * @param introspectedTable current table configurations.
      * @return boolean result
      */
@@ -77,8 +98,36 @@ public class PaginationPlugin extends PluginAdapter {
             Method method,
             TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable) {
+        appendPaginationInProvider(method);
+        return true;
+    }
+
+    /**
+     * Modify the selectByExampleWithBlobs in sql provider class.
+     *
+     * @param method            selectByExampleWithBlobs method.
+     * @param topLevelClass     topLevelClass
+     * @param introspectedTable current table configurations.
+     * @return boolean result
+     */
+    @Override
+    public boolean providerSelectByExampleWithBLOBsMethodGenerated(
+            Method method,
+            TopLevelClass topLevelClass,
+            IntrospectedTable introspectedTable) {
+        appendPaginationInProvider(method);
+        return true;
+    }
+
+    /**
+     * Append pagination to method in provider.
+     *
+     * @param method append pagination code to method.
+     */
+    private void appendPaginationInProvider(Method method) {
 
         List<String> bodyLines = method.getBodyLines();
+
         // delete the line of "return sql.toString();"
         bodyLines.remove(bodyLines.size() - 1);
 
@@ -95,48 +144,42 @@ public class PaginationPlugin extends PluginAdapter {
         bodyLines.add("}");
         bodyLines.add("}");
         bodyLines.add("return sqlBuilder.toString();");
-
-        return super.providerSelectByExampleWithoutBLOBsMethodGenerated(method, topLevelClass, introspectedTable);
     }
 
     /**
      * Add a field into class both with setter and getter. <br/>
      *
-     * @param topLevelClass topLevelClass
-     * @param introspectedTable current table configurations.
-     * @param fieldType  field type
-     * @param name  field name.
-     * @param initializationString  initializationString
+     * @param topLevelClass        topLevelClass
+     * @param introspectedTable    current table configurations.
+     * @param fieldType            field type
+     * @param property             field name.
+     * @param initializationString initializationString
      */
     private void addField(TopLevelClass topLevelClass,
                           IntrospectedTable introspectedTable,
-                          FullyQualifiedJavaType fieldType, String name,
+                          FullyQualifiedJavaType fieldType, String property,
                           String initializationString) {
         CommentGenerator commentGenerator = context.getCommentGenerator();
         // add field
-        Field field = new Field(name,fieldType);
+        Field field = new Field(property, fieldType);
         field.setVisibility(JavaVisibility.PROTECTED);
         field.setInitializationString(initializationString);
         commentGenerator.addFieldComment(field, introspectedTable);
         topLevelClass.addField(field);
 
-        // upper first char
-        char c = name.charAt(0);
-        String camel = Character.toUpperCase(c) + name.substring(1);
-
         // add setter
-        Method method = new Method("set" + camel);
+        Method method = new Method(JavaBeansUtil.getSetterMethodName(property));
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.addParameter(new Parameter(fieldType, name));
-        method.addBodyLine("this." + name + "=" + name + ";");
+        method.addParameter(new Parameter(fieldType, property));
+        method.addBodyLine(String.format("this.%s = %s;", property, property));
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
         // add getter
-        method = new Method("get" + camel);
+        method = new Method(JavaBeansUtil.getGetterMethodName(property, fieldType));
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setReturnType(fieldType);
-        method.addBodyLine("return " + name + ";");
+        method.addBodyLine(String.format("return %s;", property));
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
     }
