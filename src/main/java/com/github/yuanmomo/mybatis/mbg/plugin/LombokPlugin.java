@@ -64,16 +64,33 @@ public class LombokPlugin extends PluginAdapter {
         return !PropertiesUtil.getBooleanProp(this.getProperties(), DATA_FAG);
     }
 
-    @Override
-    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,
-                                                 IntrospectedTable introspectedTable) {
+    private void addLombokAnnotation(TopLevelClass topLevelClass){
         for (String configKey : CONFIG_MAP.keySet()) {
             boolean flag = PropertiesUtil.getBooleanProp(this.getProperties(), configKey);
-            if (flag) { 
+            if (flag) {
                 topLevelClass.addImportedType(new FullyQualifiedJavaType(CONFIG_MAP.get(configKey).getName()));
                 topLevelClass.addAnnotation(String.format("@%s", CONFIG_MAP.get(configKey).getSimpleName()));
             }
         }
+    }
+
+    @Override
+    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,
+                                                 IntrospectedTable introspectedTable) {
+        addLombokAnnotation(topLevelClass);
+        return true;
+    }
+
+
+    @Override
+    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        addLombokAnnotation(topLevelClass);
+        return true;
+    }
+
+    @Override
+    public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        addLombokAnnotation(topLevelClass);
         return true;
     }
 

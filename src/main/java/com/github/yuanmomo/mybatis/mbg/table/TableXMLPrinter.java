@@ -101,6 +101,7 @@ public class TableXMLPrinter {
 //                output.add("\t\t\t<property name=\"generatedBusinessName\" value=\"" + javaBeanName + "Business\"/>");
 //                output.add("\t\t\t<property name=\"generatedControllerName\" value=\"" + javaBeanName + "Controller\"/>");
 
+                System.out.println(String.format("Print table : %s", tableName));
                 // 判断表是否含有id的主键
                 psmt = con.prepareStatement("desc " + tableName);
                 columListRS = psmt.executeQuery();
