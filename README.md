@@ -107,7 +107,7 @@ int batchInsert(java.util.List<<Bean>> list)
 mbg.targetProject=src/main/java
 
 # jdbc 配置，主要连接和库名
-driver=com.mysql.jdbc.Driver
+driver=com.mysql.cj.jdbc.Driver
 url=jdbc:mysql://localhost:3306/mbg
 username=root
 password=root
