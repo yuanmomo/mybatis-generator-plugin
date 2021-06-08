@@ -95,7 +95,7 @@ int batchInsert(java.util.List<<Bean>> list)
 <dependency>
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.11</version>
     <scope>compile</scope>
 </dependency>
 ```
