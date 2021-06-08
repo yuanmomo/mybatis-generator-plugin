@@ -95,7 +95,7 @@ int batchInsert(java.util.List<<Bean>> list)
 <dependency>
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.11</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -107,7 +107,7 @@ int batchInsert(java.util.List<<Bean>> list)
 mbg.targetProject=src/main/java
 
 # jdbc 配置，主要连接和库名
-driver=com.mysql.jdbc.Driver
+driver=com.mysql.cj.jdbc.Driver
 url=jdbc:mysql://localhost:3306/mbg
 username=root
 password=root
