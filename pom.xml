@@ -7,7 +7,7 @@
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
 
     <name>mybatis-generator-plugin</name>
     <description>
