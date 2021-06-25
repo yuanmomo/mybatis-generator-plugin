@@ -2,7 +2,6 @@ package com.github.yuanmomo.mybatis.mbg.table;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +76,7 @@ public class TableXMLPrinter {
         // jdbc connection
         Connection con = null;
         // all the tables
-        ResultSet tableListRs = null;
+        List<String> tableList = new ArrayList<>();
         // all the columns in one table
         ResultSet columListRS = null;
         // statement to exec the sql query
@@ -86,20 +85,29 @@ public class TableXMLPrinter {
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, password);
-            DatabaseMetaData metadata = con.getMetaData();
+            //Creating a Statement object
+            psmt = con.prepareStatement("show tables");
+            //Retrieving the data
+            ResultSet rs = psmt.executeQuery();
 
+            System.out.println("------------------------------------------");
+            System.out.println("Tables in the current database: ");
+            while(rs.next()) {
+                String tableName = rs.getString(1);
+
+                tableList.add(tableName);
+                System.out.println(String.format("Find table: %s", tableName));
+            }
+
+            System.out.println("------------------------------------------");
             // 从数据库的元数据中取得所有的边表名
-            tableListRs = metadata.getTables(null, schema, "%", new String[]{"TABLE"});
-            while (tableListRs.next()) {
-                String tableName = tableListRs.getString(3);
+            for (String tableName : tableList) {
                 String javaBeanName = JavaBeansUtil.getCamelCaseString(tableName, true);
 
                 output.add(String.format("\t\t<table tableName=\"%s\" domainObjectName=\"%s\">",tableName,javaBeanName));
                 if(isPrintSchema){
                     output.add(String.format("\t\t\t<property name=\"runtimeSchema\" value=\"%s\"/>",schema));
                 }
-//                output.add("\t\t\t<property name=\"generatedBusinessName\" value=\"" + javaBeanName + "Business\"/>");
-//                output.add("\t\t\t<property name=\"generatedControllerName\" value=\"" + javaBeanName + "Controller\"/>");
 
                 System.out.println(String.format("Print table : %s", tableName));
                 // 判断表是否含有id的主键
@@ -120,7 +128,6 @@ public class TableXMLPrinter {
             try {
                 psmt.close();
                 columListRS.close();
-                tableListRs.close();
                 con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
