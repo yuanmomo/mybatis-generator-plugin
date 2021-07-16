@@ -47,11 +47,12 @@ MyBatis Generator Plugin 插件生成的 Example 类中会增加两个参数，s
 由于上面的场景，所以在生成的 Provider 类中增加了一个 `ALL_COLUMN_FIELDS` 字段，包含了所有的表的列。如果使用全列时，使用这个字段就可以避免上面的问题。
 
 ## Lombok 支持
-可以在生成的 Bean 对象上增加 Lombok 的 Annotation：
+可以在生成的 Bean 对象上增加 Lombok 的 Annotation，可以自定义配置任意存在的 Lombok Annotation：
 * @Data
 * @EqualsAndHashCode
 * @ToString
 * @NoArgsConstructor
+* @Builder
 
 ## 简化生成类
 该插件可以屏蔽 MBG 生成的 Exapmle 相关的信息，简化生成的文件，包括：
