@@ -95,7 +95,7 @@ int batchInsert(java.util.List<<Bean>> list)
 <dependency>
     <groupId>com.github.yuanmomo</groupId>
     <artifactId>mybatis-generator-plugin</artifactId>
-    <version>1.0.12</version>
+    <version>1.0.13</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -180,10 +180,11 @@ public class GenerateTool {
 
     <!-- 生成的实体类（Bean）增加 Lombok 注解. -->
     <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.LombokPlugin">
-        <property name="data" value="true"/>
-        <property name="hashEquals" value="true"/>
-        <property name="toString" value="true"/>
-        <property name="noArgConstructor" value="true"/>
+        <property name="Data" value="lombok.Data"/>
+        <property name="EqualsAndHashCode" value="lombok.EqualsAndHashCode"/>
+        <property name="ToString" value="lombok.ToString"/>
+        <property name="NoArgsConstructor" value="lombok.NoArgsConstructor"/>
+        <property name="Builder" value="lombok.Builder"/>
     </plugin>
 
     <!-- 在 Provider 类增加 All Columns 属性 . -->

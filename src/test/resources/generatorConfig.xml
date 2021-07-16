@@ -50,10 +50,11 @@
 
         <!-- Add Lombok support. -->
         <plugin type="com.github.yuanmomo.mybatis.mbg.plugin.LombokPlugin">
-            <property name="data" value="true"/>
-            <property name="hashEquals" value="true"/>
-            <property name="toString" value="true"/>
-            <property name="noArgConstructor" value="true"/>
+            <property name="Data" value="lombok.Data"/>
+            <property name="EqualsAndHashCode" value="lombok.EqualsAndHashCode"/>
+            <property name="ToString" value="lombok.ToString"/>
+            <property name="NoArgsConstructor" value="lombok.NoArgsConstructor"/>
+            <property name="Builder" value="lombok.Builder"/>
         </plugin>
 
         <!-- Generate simple objects. -->
