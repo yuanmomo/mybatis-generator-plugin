@@ -1,6 +1,5 @@
 package com.github.yuanmomo.mybatis.mbg.plugin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import com.github.yuanmomo.mybatis.mbg.util.PropertiesUtil;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 /**
  *
  */
@@ -29,19 +23,7 @@ public class LombokPlugin extends PluginAdapter {
 
     private static Logger logger = LoggerFactory.getLogger(LombokPlugin.class);
 
-    public static final String DATA_FAG = "data";
-    public static final String HASH_EQUALS_FLAG_FLAG = "hashEquals";
-    public static final String TO_STRING_FLAT = "toString";
-    public static final String NO_ARG_CONSTRUCTOR_FLAG = "noArgConstructor";
-
-    public static final Map<String, Class<?>> CONFIG_MAP = new HashMap<>();
-    static {
-        CONFIG_MAP.put(DATA_FAG, Data.class);
-        CONFIG_MAP.put(HASH_EQUALS_FLAG_FLAG, EqualsAndHashCode.class);
-        CONFIG_MAP.put(TO_STRING_FLAT, ToString.class);
-        CONFIG_MAP.put(NO_ARG_CONSTRUCTOR_FLAG, NoArgsConstructor.class);
-    }
-
+    public static final String DATA_FAG = "lombok.Data";
 
     @Override
     public boolean validate(List<String> warnings) {
@@ -53,7 +35,7 @@ public class LombokPlugin extends PluginAdapter {
                                               TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
                                               IntrospectedTable introspectedTable,
                                               Plugin.ModelClassType modelClassType) {
-        return !PropertiesUtil.getBooleanProp(this.getProperties(), DATA_FAG);
+        return !PropertiesUtil.containsValueIgnoreCase(this.getProperties(), DATA_FAG);
     }
 
     @Override
@@ -61,16 +43,17 @@ public class LombokPlugin extends PluginAdapter {
                                               TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
                                               IntrospectedTable introspectedTable,
                                               Plugin.ModelClassType modelClassType) {
-        return !PropertiesUtil.getBooleanProp(this.getProperties(), DATA_FAG);
+        return !PropertiesUtil.containsValueIgnoreCase(this.getProperties(), DATA_FAG);
     }
 
     private void addLombokAnnotation(TopLevelClass topLevelClass){
-        for (String configKey : CONFIG_MAP.keySet()) {
-            boolean flag = PropertiesUtil.getBooleanProp(this.getProperties(), configKey);
-            if (flag) {
-                topLevelClass.addImportedType(new FullyQualifiedJavaType(CONFIG_MAP.get(configKey).getName()));
-                topLevelClass.addAnnotation(String.format("@%s", CONFIG_MAP.get(configKey).getSimpleName()));
-            }
+        if (this.getProperties() == null || this.getProperties().isEmpty() ){
+            return;
+        }
+        for (Map.Entry<Object, Object> entry : this.getProperties().entrySet()) {
+            FullyQualifiedJavaType fullyQualifiedJavaType = new FullyQualifiedJavaType(String.valueOf(entry.getValue()));
+            topLevelClass.addImportedType(fullyQualifiedJavaType);
+            topLevelClass.addAnnotation(String.format("@%s", fullyQualifiedJavaType.getShortName()));
         }
     }
 

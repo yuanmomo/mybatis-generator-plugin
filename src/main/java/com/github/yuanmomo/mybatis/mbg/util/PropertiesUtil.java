@@ -2,6 +2,7 @@ package com.github.yuanmomo.mybatis.mbg.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.BooleanUtils;
@@ -24,7 +25,6 @@ public class PropertiesUtil {
     }
 
     /**
-     *
      * @param properties
      * @param name
      * @return
@@ -34,27 +34,41 @@ public class PropertiesUtil {
     }
 
     /**
-     *
      * @param properties
      * @param name
      * @return
      */
     public static String getStringProp(Properties properties, String name, String defaultValue) {
-        return properties.getProperty(name,defaultValue);
+        return properties.getProperty(name, defaultValue);
     }
 
     /**
-     *
      * @param properties
      * @param name
      * @return
      */
     public static boolean getBooleanProp(Properties properties, String name) {
-        return getBooleanProp(properties,name,false);
+        return getBooleanProp(properties, name, false);
     }
 
     /**
-     *
+     * @param properties
+     * @param value
+     * @return
+     */
+    public static boolean containsValueIgnoreCase(Properties properties, String value) {
+        if (properties == null || properties.isEmpty()){
+            return false;
+        }
+        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+            if (StringUtils.equalsIgnoreCase(String.valueOf(entry.getValue()), value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param properties
      * @param name
      * @param defaultValue
@@ -62,7 +76,7 @@ public class PropertiesUtil {
      */
     public static boolean getBooleanProp(Properties properties, String name, boolean defaultValue) {
         try {
-            if (properties == null){
+            if (properties == null) {
                 return defaultValue;
             }
             if (StringUtils.isBlank(properties.getProperty(name))) {
